@@ -1,11 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import App7 from './components/App7.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <h1 class="font-bold text-3xl text-center">Vue Fundamental</h1>
+  <App7 />
 </template>
-
-<style scoped></style>

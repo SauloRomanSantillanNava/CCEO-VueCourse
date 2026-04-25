@@ -39,7 +39,7 @@ const posts = ref<Post[]>([
   {
     id: 3,
     title: "Titulo 3",
-    colorText: "#31BC793",
+    colorText: "#31BC79",
     description: "Hola Mundo 3",
   },
   {

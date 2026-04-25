@@ -2,7 +2,7 @@
   <section class="mx-auto w-[95%]">
     <div
       class="flex flex-col gap-3 border-b border-b-gray-300 p-3 mb-3"
-      :style="`color: ${colorText}`"
+      :style="{ color: colorText }"
     >
       <h2 class="font-bold text-3xl">{{ title }}</h2>
       <p>{{ description }}</p>
@@ -40,12 +40,11 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  colorText: "#00000",
+  colorText: "#000000",
   description: "Descripción del post",
 });
 
 const selectPost = (postId: number) => {
-  if (!postId) return;
   emits("select", postId);
 };
 </script>

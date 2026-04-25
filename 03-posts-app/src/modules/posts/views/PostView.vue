@@ -33,34 +33,47 @@ import PaginationPost from "../components/PaginationPost.vue";
 import BlogPost from "../components/BlogPost.vue";
 import SpinnerLoader from "@/modules/common/components/SpinnerLoader.vue";
 
-const posts = ref<Post[]>();
+const PAGE_SIZE = 10;
+const posts = ref<Post[]>([]);
 
 const isLoading = ref<boolean>(false);
 const lowerBoundPagination = ref<number>(0);
-const upperBoundPagination = ref<number>(10);
+const upperBoundPagination = ref<number>(PAGE_SIZE);
 const renderPosts = computed(() =>
   posts.value?.slice(lowerBoundPagination.value, upperBoundPagination.value),
 );
 
+const updatePagination = (newLower: number) => {
+  const lower = Math.max(0, newLower);
+  const upper = Math.min(lower + PAGE_SIZE, posts.value.length);
+
+  lowerBoundPagination.value = lower;
+  upperBoundPagination.value = upper;
+};
+
 const onNextPage = () => {
-  lowerBoundPagination.value += 10;
-  upperBoundPagination.value += 10;
+  updatePagination(lowerBoundPagination.value + PAGE_SIZE);
 };
 
 const onPrevPage = () => {
-  lowerBoundPagination.value -= 10;
-  upperBoundPagination.value -= 10;
+  updatePagination(lowerBoundPagination.value - PAGE_SIZE);
 };
 
 onMounted(async () => {
   isLoading.value = true;
-  const dataPosts = await getPosts();
-  const formattedPosts: Post[] = dataPosts.map((post) => ({
-    id: post.id,
-    body: post.body,
-    title: post.title,
-  }));
-  posts.value = formattedPosts;
-  isLoading.value = false;
+  try {
+    const dataPosts = await getPosts();
+    const formattedPosts: Post[] = dataPosts.map((post) => ({
+      id: post.id,
+      body: post.body,
+      title: post.title,
+    }));
+    posts.value = formattedPosts;
+  } catch (error) {
+    console.error("Failed to load posts", error);
+    posts.value = [];
+  } finally {
+    isLoading.value = false;
+  }
 });
 </script>

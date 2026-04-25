@@ -12,7 +12,9 @@ interface Props {
 const props = defineProps<Props>();
 
 const isPrevDisabled = computed(() => props.lowerBound === 0);
-const isNextDisabled = computed(() => props.upperBound === props.limit);
+const isNextDisabled = computed(
+  () => props.limit === 0 || props.upperBound >= props.limit,
+);
 </script>
 
 <template>

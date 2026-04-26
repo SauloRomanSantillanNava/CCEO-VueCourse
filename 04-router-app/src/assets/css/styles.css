@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.btn {
+  @apply py-3 px-5 text-center font-bold rounded-full shadow-lg cursor-pointer;
+}
+
+.btn-disabled {
+  @apply opacity-50 bg-gray-700 cursor-not-allowed;
+}

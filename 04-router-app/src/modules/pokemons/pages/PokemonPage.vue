@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { usePokemon } from "../composables/usePokemon";
 import SpinnerLoader from "@/modules/common/components/SpinnerLoader.vue";
+import PokemonNotFound from "../components/PokemonNotFound.vue";
 
 const route = useRoute();
 const { name } = route.params;
 
-const { isLoading, message, pokemon } = usePokemon(name as string);
+const { isLoading, pokemon } = usePokemon(name as string);
 </script>
 
 <template>
@@ -15,9 +16,10 @@ const { isLoading, message, pokemon } = usePokemon(name as string);
       <spinner-loader />
     </div>
 
-    <div v-else-if="message && !pokemon" class="text-center text-red-500 mt-20">
-      {{ message }}
-    </div>
+    <pokemon-not-found
+      v-else-if="!pokemon"
+      :pokemonNameNotFound="name as string"
+    />
 
     <div v-else class="grid md:grid-cols-2 gap-10 items-start">
       <div class="flex flex-col items-center md:items-start">

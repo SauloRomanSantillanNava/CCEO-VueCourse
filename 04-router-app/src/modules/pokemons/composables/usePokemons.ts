@@ -57,6 +57,5 @@ export const usePokemons = () => {
 
     onNextPage,
     onPrevPage,
-    reload: fetchPokemons,
   };
 };

@@ -1,3 +1,4 @@
+import Page404 from "@/modules/common/pages/Page404.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -6,7 +7,7 @@ const router = createRouter({
     {
       path: "/pokemons",
       name: "app",
-      component: () => import("@/modules/pokemons/layouts/PokemonLayout.vue"),
+      component: () => import("@/modules/common/layouts/PokemonLayout.vue"),
       children: [
         {
           path: "list",
@@ -24,6 +25,23 @@ const router = createRouter({
             import("@/modules/pokemons/pages/PokemonsFavoritePage.vue"),
         },
       ],
+    },
+    {
+      path: '/game',
+      name: 'pokemon-game',
+      component: () => import("@/modules/common/layouts/PokemonLayout.vue"),
+      children: [
+        {
+          path: 'play',
+          name: 'pokemon-game-play',
+          component: () => import('@/modules/pokemon-game/pages/PageGame.vue')
+        },
+      ]
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'no-page',
+      component: () => Page404
     },
     {
       path: '/',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MenuNav from "@/modules/common/components/MenuNav.vue";
-import PokemonsNavigation from "../components/PokemonsNavigation.vue";
+import PokemonsNavigation from "@/modules/pokemons/components/PokemonsNavigation.vue";
 </script>
 
 <template>

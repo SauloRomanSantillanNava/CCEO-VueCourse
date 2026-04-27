@@ -4,19 +4,14 @@ import { usePokemon } from "../composables/usePokemon";
 import SpinnerLoader from "@/modules/common/components/SpinnerLoader.vue";
 import PokemonNotFound from "../components/PokemonNotFound.vue";
 import PokemonToggleFavorites from "../components/PokemonToggleFavorites.vue";
-import { usePokemonsFavorite } from "../composables/usePokemonsFavorite";
-import type { Pokemon } from "@/modules/common/interfaces";
+import { useFavoritePokemonsStore } from "@/store/favorite-pokemons.store";
 
 const route = useRoute();
 const { name } = route.params;
 
 const { isLoading, pokemon } = usePokemon(name as string);
-const { isPokemonInFavorites, onAdd, onRemove } = usePokemonsFavorite();
-
-const onToggle = () =>
-  isPokemonInFavorites(pokemon.value?.id ?? 0)
-    ? onRemove(pokemon.value?.id ?? 0)
-    : onAdd(pokemon.value ?? ({} as Pokemon));
+const favoritePokemonsStore = useFavoritePokemonsStore();
+const { isPokemonInFavorites } = favoritePokemonsStore;
 </script>
 
 <template>
@@ -55,8 +50,8 @@ const onToggle = () =>
         </div>
 
         <pokemon-toggle-favorites
-          :is-in-favorites="isPokemonInFavorites(pokemon?.id ?? 0)"
-          @on-toggle="onToggle"
+          :isInFavorites="isPokemonInFavorites(pokemon.id)"
+          :pokemon="pokemon"
         />
       </div>
 

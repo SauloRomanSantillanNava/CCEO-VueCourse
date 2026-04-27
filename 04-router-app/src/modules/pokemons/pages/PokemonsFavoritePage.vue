@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { usePokemonsFavorite } from "../composables/usePokemonsFavorite";
+import { useFavoritePokemonsStore } from "@/store/favorite-pokemons.store";
+import PokemonsListFavorites from "../components/PokemonsListFavorites.vue";
+import { storeToRefs } from "pinia";
 
-const { favoritePokemons } = usePokemonsFavorite();
+const favoritePokemonsStore = useFavoritePokemonsStore();
+const { onRemove } = favoritePokemonsStore;
+const { favoritePokemons } = storeToRefs(favoritePokemonsStore);
 </script>
 
 <template>
-  <h1>Pokemons Favorite Page</h1>
+  <pokemons-list-favorites @remove="onRemove" :favorites="favoritePokemons" />
 </template>

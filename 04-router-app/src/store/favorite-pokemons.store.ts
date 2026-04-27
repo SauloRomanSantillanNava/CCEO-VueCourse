@@ -1,8 +1,8 @@
-import type { Pokemon } from "@/modules/common/interfaces"
-import { ref } from "vue"
+import type { Pokemon } from "@/modules/common/interfaces";
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const usePokemonsFavorite = () => {
-
+export const useFavoritePokemonsStore = defineStore('favorite-pokemons', () => {
     const favoritePokemons = ref<Pokemon[]>([])
 
     const isPokemonInFavorites = (pokemonId: number): boolean => {
@@ -25,4 +25,4 @@ export const usePokemonsFavorite = () => {
         onRemove,
         isPokemonInFavorites
     }
-}
+})

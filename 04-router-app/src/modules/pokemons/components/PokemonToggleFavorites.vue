@@ -1,18 +1,24 @@
 <script setup lang="ts">
+import type { Pokemon } from "@/modules/common/interfaces";
+import { useFavoritePokemonsStore } from "@/store/favorite-pokemons.store";
+
 interface Props {
   isInFavorites: boolean;
+  pokemon: Pokemon;
 }
 
-defineProps<Props>();
+const { pokemon, isInFavorites } = defineProps<Props>();
 
-const emits = defineEmits<{
-  onToggle: [];
-}>();
+const favoritePokemonsStore = useFavoritePokemonsStore();
+const { onAdd, onRemove, isPokemonInFavorites } = favoritePokemonsStore;
+
+const onToggle = () =>
+  isInFavorites ? onRemove(pokemon.id ?? 0) : onAdd(pokemon ?? ({} as Pokemon));
 </script>
 
 <template>
   <button
-    @click="emits('onToggle')"
+    @click="onToggle"
     :class="[
       'btn text-white',
       {

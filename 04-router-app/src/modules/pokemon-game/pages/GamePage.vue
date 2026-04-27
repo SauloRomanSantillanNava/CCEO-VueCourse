@@ -2,10 +2,16 @@
 import GameNewButton from "../components/GameNewButton.vue";
 import GameOptions from "../components/GameOptions.vue";
 import GamePokemonPicture from "../components/GamePokemonPicture.vue";
+import GameResult from "../components/GameResult.vue";
 import { usePokemonGame } from "../composables/usePokemonGame";
 import { GameStatus } from "../interfaces/game-status.enum";
-const { pokemonsOptions, randomPokemon, gameStatus, checkAnswer } =
-  usePokemonGame();
+const {
+  pokemonsOptions,
+  randomPokemon,
+  gameStatus,
+  checkAnswer,
+  getNextRound,
+} = usePokemonGame();
 </script>
 
 <template>
@@ -14,7 +20,8 @@ const { pokemonsOptions, randomPokemon, gameStatus, checkAnswer } =
       <h1 class="font-bold text-black text-3xl">¿Quién es este Pokemon?</h1>
     </header>
     <div class="flex flex-col gap-8 items-center">
-      <game-new-button />
+      <game-result :result="gameStatus" />
+      <game-new-button @new-game="getNextRound" />
       <game-pokemon-picture
         :pokemon-id="randomPokemon?.id ?? 0"
         :pokemon-name="randomPokemon?.name ?? ''"

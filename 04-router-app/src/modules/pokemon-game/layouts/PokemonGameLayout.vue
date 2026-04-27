@@ -18,7 +18,7 @@ import GamePokemonsNavigation from "../components/GamePokemonsNavigation.vue";
     </header>
 
     <main class="flex-1 flex flex-col items-center justify-center px-6">
-      <div class="w-full max-w-3xl">
+      <div class="w-full max-w-3xl py-10">
         <router-view />
       </div>
     </main>

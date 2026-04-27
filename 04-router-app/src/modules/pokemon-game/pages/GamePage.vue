@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { watch } from "vue";
 import GameNewButton from "../components/GameNewButton.vue";
 import GameOptions from "../components/GameOptions.vue";
 import GamePokemonPicture from "../components/GamePokemonPicture.vue";
 import GameResult from "../components/GameResult.vue";
 import { usePokemonGame } from "../composables/usePokemonGame";
 import { GameStatus } from "../interfaces/game-status.enum";
+import { GameCounterType, useGameStatsStore } from "@/store/game-stats.store";
 const {
   pokemonsOptions,
   randomPokemon,
@@ -12,6 +14,16 @@ const {
   checkAnswer,
   getNextRound,
 } = usePokemonGame();
+
+const gameStatsStore = useGameStatsStore();
+
+watch(gameStatus, () => {
+  if (gameStatus.value === GameStatus.Won) {
+    gameStatsStore.onIncrement(GameCounterType.won);
+  } else if (gameStatus.value === GameStatus.Lost) {
+    gameStatsStore.onIncrement(GameCounterType.lost);
+  }
+});
 </script>
 
 <template>

@@ -1,10 +1,14 @@
 import pokemonApi from "../api/pokemons.api";
-import type { PokemonsResponse, Pokemon, ResultResponse } from "../interfaces";
+import type {
+  PokemonsResponse,
+  Pokemon,
+  ResultResponse,
+  PokemonWithPagination,
+  PokemonItemResponse,
+} from "../interfaces";
 
-const DEFAULT_POKEMONS_QUANTITY = 160;
-
-const formatPokemons = (pokemons: PokemonsResponse): Pokemon[] => {
-  return pokemons.results.map((pokemon) => {
+const formatPokemons = (pokemons: PokemonItemResponse[]): Pokemon[] => {
+  return pokemons.map((pokemon) => {
     const pokemonId = Number(pokemon.url.split("/").at(-2) ?? 0);
     return {
       id: pokemonId,
@@ -14,17 +18,19 @@ const formatPokemons = (pokemons: PokemonsResponse): Pokemon[] => {
 };
 
 export const getPokemons = async (
-  howMany: number = DEFAULT_POKEMONS_QUANTITY,
-): Promise<ResultResponse<Pokemon[]>> => {
+  url: string,
+): Promise<ResultResponse<PokemonWithPagination>> => {
   try {
-    const { data } = await pokemonApi.get<PokemonsResponse>(
-      `/?limit=${howMany}`,
-    );
-    const formattedPokemons = formatPokemons(data);
+    const { data } = await pokemonApi.get<PokemonsResponse>(url);
+    const formattedPokemons = formatPokemons(data.results);
+    const { next, previous } = data;
 
     return {
       ok: true,
-      data: formattedPokemons,
+      data: {
+        pagination: { next, previous },
+        pokemons: formattedPokemons,
+      },
     };
   } catch (error: unknown) {
     return {

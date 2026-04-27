@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import PokemonCard from "../components/PokemonCard.vue";
 import PokemonsData from "../components/PokemonsData.vue";
+import PokemonsPagination from "../components/PokemonsPagination.vue";
 import { usePokemons } from "../composables/usePokemons";
 
-const { isLoading, message, pokemons } = usePokemons();
+const { isLoading, message, pokemons, pagination, onNextPage, onPrevPage } =
+  usePokemons();
 </script>
 
 <template>
@@ -17,5 +19,11 @@ const { isLoading, message, pokemons } = usePokemons();
     />
   </main>
 
-  <div class="flex justify-end w-full">Paginación</div>
+  <div class="flex justify-end w-full">
+    <pokemons-pagination
+      @prev-page="onPrevPage"
+      @next-page="onNextPage"
+      :pagination="pagination"
+    />
+  </div>
 </template>

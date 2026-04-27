@@ -25,7 +25,7 @@ const pokemonImage = computed(
       >
         <span class="font-bold">#{{ id }}</span>
       </div>
-      <p class="font-semibold text-xl">{{ name }}</p>
+      <p class="font-semibold text-xl capitalize">{{ name }}</p>
     </div>
     <img
       class="w-12 h-12"

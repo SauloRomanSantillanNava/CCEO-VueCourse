@@ -4,7 +4,11 @@ export interface Pokemon {
 }
 
 export interface PokemonWithPagination {
-  next: string | null;
-  prev: string | null;
+  pagination: PokemonPagination;
   pokemons: Pokemon[];
+}
+
+export interface PokemonPagination {
+  next: string | null;
+  previous: string | null;
 }

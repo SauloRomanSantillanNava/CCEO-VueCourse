@@ -3,11 +3,20 @@ import { useRoute, useRouter } from "vue-router";
 import { usePokemon } from "../composables/usePokemon";
 import SpinnerLoader from "@/modules/common/components/SpinnerLoader.vue";
 import PokemonNotFound from "../components/PokemonNotFound.vue";
+import PokemonToggleFavorites from "../components/PokemonToggleFavorites.vue";
+import { usePokemonsFavorite } from "../composables/usePokemonsFavorite";
+import type { Pokemon } from "@/modules/common/interfaces";
 
 const route = useRoute();
 const { name } = route.params;
 
 const { isLoading, pokemon } = usePokemon(name as string);
+const { isPokemonInFavorites, onAdd, onRemove } = usePokemonsFavorite();
+
+const onToggle = () =>
+  isPokemonInFavorites(pokemon.value?.id ?? 0)
+    ? onRemove(pokemon.value?.id ?? 0)
+    : onAdd(pokemon.value ?? ({} as Pokemon));
 </script>
 
 <template>
@@ -35,7 +44,7 @@ const { isLoading, pokemon } = usePokemon(name as string);
 
         <p class="text-gray-500 text-lg">#{{ pokemon?.id }}</p>
 
-        <div class="flex gap-2 mt-4">
+        <div class="flex gap-2 my-4">
           <span
             v-for="type in pokemon?.types"
             :key="type.type"
@@ -44,6 +53,11 @@ const { isLoading, pokemon } = usePokemon(name as string);
             {{ type.type }}
           </span>
         </div>
+
+        <pokemon-toggle-favorites
+          :is-in-favorites="isPokemonInFavorites(pokemon?.id ?? 0)"
+          @on-toggle="onToggle"
+        />
       </div>
 
       <div class="space-y-8">

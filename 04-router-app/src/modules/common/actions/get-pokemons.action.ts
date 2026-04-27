@@ -1,4 +1,4 @@
-import pokemonApi from "../api/pokemons.api";
+import { HTTPClient } from "../config/plugins/http-client.plugin";
 import type {
   PokemonsResponse,
   Pokemon,
@@ -7,7 +7,7 @@ import type {
   PokemonItemResponse,
 } from "../interfaces";
 
-const formatPokemons = (pokemons: PokemonItemResponse[]): Pokemon[] => {
+const mapPokemonResponse = (pokemons: PokemonItemResponse[]): Pokemon[] => {
   return pokemons.map((pokemon) => {
     const pokemonId = Number(pokemon.url.split("/").at(-2) ?? 0);
     return {
@@ -21,9 +21,8 @@ export const getPokemons = async (
   url: string,
 ): Promise<ResultResponse<PokemonWithPagination>> => {
   try {
-    const { data } = await pokemonApi.get<PokemonsResponse>(url);
-    const formattedPokemons = formatPokemons(data.results);
-    const { next, previous } = data;
+    const { results, next, previous } = await HTTPClient.get<PokemonsResponse>(url);
+    const formattedPokemons = mapPokemonResponse(results);
 
     return {
       ok: true,

@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import MenuNav from "@/modules/common/components/MenuNav.vue";
+import PokemonsNavigation from "../components/PokemonsNavigation.vue";
 </script>
 
 <template>
   <header class="bg-slate-800 text-white flex items-center p-5 justify-between">
-    <menu-nav />
     <div class="flex items-center gap-5">
       <h1 class="font-bold text-2xl">PokemonApp &mdash;</h1>
+      <pokemons-navigation />
     </div>
+    <menu-nav />
   </header>
 
-  <main class="p-5 min-h-svh">
+  <main class="p-5">
     <router-view />
   </main>
 

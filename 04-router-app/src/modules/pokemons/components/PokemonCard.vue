@@ -16,7 +16,7 @@ const pokemonImage = computed(
 
 <template>
   <router-link
-    :to="`/pokemon/${name}`"
+    :to="`/pokemons/pokemon/${name}`"
     class="transition-all hover:scale-105 hover:shadow-md bg-white border border-gray-300 p-5 rounded-full mb-3 flex justify-between items-center"
   >
     <div class="flex items-center gap-3">

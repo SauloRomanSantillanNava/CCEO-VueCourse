@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MenuNav from "@/modules/common/components/MenuNav.vue";
-import PokemonsGameNavigation from "../components/PokemonsGameNavigation.vue";
+import GamePokemonsNavigation from "../components/GamePokemonsNavigation.vue";
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import PokemonsGameNavigation from "../components/PokemonsGameNavigation.vue";
     >
       <div class="flex items-center gap-5">
         <h1 class="font-bold text-2xl">PokemonApp &mdash; Juego</h1>
-        <pokemons-game-navigation />
+        <game-pokemons-navigation />
       </div>
       <menu-nav />
     </header>

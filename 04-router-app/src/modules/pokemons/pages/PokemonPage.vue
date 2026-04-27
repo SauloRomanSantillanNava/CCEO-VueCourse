@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { usePokemon } from "../composables/usePokemon";
 import SpinnerLoader from "@/modules/common/components/SpinnerLoader.vue";
 import PokemonNotFound from "../components/PokemonNotFound.vue";

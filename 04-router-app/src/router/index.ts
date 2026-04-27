@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: "/pokemons",
       name: "app",
-      component: () => import("@/modules/common/layouts/PokemonLayout.vue"),
+      component: () => import("@/modules/pokemons/layouts/PokemonLayout.vue"),
       children: [
         {
           path: "list",
@@ -29,13 +29,18 @@ const router = createRouter({
     {
       path: '/game',
       name: 'pokemon-game',
-      component: () => import("@/modules/common/layouts/PokemonLayout.vue"),
+      component: () => import("@/modules/pokemon-game/layouts/PokemonGameLayout.vue"),
       children: [
         {
           path: 'play',
           name: 'pokemon-game-play',
-          component: () => import('@/modules/pokemon-game/pages/PageGame.vue')
+          component: () => import('@/modules/pokemon-game/pages/GamePage.vue')
         },
+        {
+          path: 'stats',
+          name: 'pokemon-game-stats',
+          component: () => import('@/modules/pokemon-game/pages/GameStatsPage.vue'),
+        }
       ]
     },
     {

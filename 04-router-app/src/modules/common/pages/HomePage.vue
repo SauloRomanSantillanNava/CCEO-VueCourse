@@ -18,14 +18,14 @@
     <div class="flex flex-col sm:flex-row gap-4">
       <router-link
         to="/pokemons/list"
-        class="px-6 py-3 rounded-xl bg-blue-500 text-white font-medium hover:bg-blue-600 transition shadow"
+        class="btn bg-blue-500 text-white hover:bg-blue-700 transition shadow"
       >
         Ver Pokémons
       </router-link>
 
       <router-link
         to="/game/play"
-        class="px-6 py-3 rounded-xl bg-pink-500 text-white font-medium hover:bg-pink-600 transition shadow"
+        class="btn bg-pink-500 text-white hover:bg-pink-600 transition shadow"
       >
         Jugar
       </router-link>

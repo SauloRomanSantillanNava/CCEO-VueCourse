@@ -1,11 +1,14 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <Titulo texto="Mi titulo" />
+  <Cuenta />
 </template>
 
-<style scoped></style>
+<script lang="ts">
+// import Cuenta from "./components/Cuenta.vue";
+import Titulo from "./components/Titulo.vue";
+
+export default {
+  name: "App",
+  components: { Titulo /* Cuenta */ },
+};
+</script>

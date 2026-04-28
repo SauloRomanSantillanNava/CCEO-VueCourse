@@ -1,0 +1,50 @@
+<script setup lang="ts">
+import { watch } from "vue";
+import GameNewButton from "../components/GameNewButton.vue";
+import GameOptions from "../components/GameOptions.vue";
+import GamePokemonPicture from "../components/GamePokemonPicture.vue";
+import GameResult from "../components/GameResult.vue";
+import { usePokemonGame } from "../composables/usePokemonGame";
+import { GameStatus } from "../interfaces/game-status.enum";
+import { GameCounterType, useGameStatsStore } from "@/store/game-stats.store";
+const {
+  pokemonsOptions,
+  randomPokemon,
+  gameStatus,
+  checkAnswer,
+  getNextRound,
+} = usePokemonGame();
+
+const gameStatsStore = useGameStatsStore();
+
+watch(gameStatus, () => {
+  if (gameStatus.value === GameStatus.Won) {
+    gameStatsStore.onIncrement(GameCounterType.won);
+  } else if (gameStatus.value === GameStatus.Lost) {
+    gameStatsStore.onIncrement(GameCounterType.lost);
+  }
+});
+</script>
+
+<template>
+  <div class="flex flex-col items-center justify-center">
+    <header class="mb-5">
+      <h1 class="font-bold text-black text-3xl">¿Quién es este Pokemon?</h1>
+    </header>
+    <div class="flex flex-col gap-8 items-center">
+      <game-result :result="gameStatus" />
+      <game-new-button @new-game="getNextRound" />
+      <game-pokemon-picture
+        :pokemon-id="randomPokemon?.id ?? 0"
+        :pokemon-name="randomPokemon?.name ?? ''"
+        :is-visible="gameStatus !== GameStatus.Playing"
+      />
+      <game-options
+        :correct-answer="randomPokemon?.id ?? 0"
+        :block-selection="gameStatus !== GameStatus.Playing"
+        @select-pokemon="checkAnswer"
+        :pokemons="pokemonsOptions"
+      />
+    </div>
+  </div>
+</template>

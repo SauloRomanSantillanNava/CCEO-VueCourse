@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.btn {
+  @apply py-3 px-5 text-center font-bold rounded-full shadow-lg cursor-pointer;
+}
+
+.btn-nav {
+  @apply bg-white p-1 px-2 rounded-md text-gray-900 font-semibold;
+}

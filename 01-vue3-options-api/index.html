@@ -44,9 +44,14 @@
         <button v-on:click="agregarSaldo(100)">Agregar 100</button>
         <button :disabled="desactivar" @:click="disminuirSaldo(100)">Disminuir 100</button>
 
+        <footer-banco 
+            fecha="Abril 2026" 
+            :cantidad="cantidad" 
+        />
     </div>
 
     <script src="./main.js"></script>
+    <script src="./components/Footer.js"></script>
     <script>
         const mountedApp = app.mount('#app')
     </script>

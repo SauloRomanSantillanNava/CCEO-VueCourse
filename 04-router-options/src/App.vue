@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <main class="container">
+    <router-view />
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+  width: 1200px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+</style>
